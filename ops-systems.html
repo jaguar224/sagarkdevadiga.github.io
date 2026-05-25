@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ops & Systems — Sagar Devadiga</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0a;--surf:#111;--surf2:#1a1a1a;
+  --acc:#FF5C00;--acc2:#FFB800;
+  --txt:#f0ece4;--muted:#88887f;--bdr:rgba(255,255,255,0.08);
+  --fd:'Syne',sans-serif;--fb:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:var(--fb);font-size:16px;line-height:1.7;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 3.5rem;background:rgba(10,10,10,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--bdr)}
+.nav-logo{font-family:var(--fd);font-weight:800;font-size:1.05rem;letter-spacing:-.02em}
+.nav-logo span{color:var(--acc)}
+.nav-links{display:flex;gap:1.6rem;list-style:none;align-items:center}
+.nav-links a{color:var(--muted);font-size:.78rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--acc)}
+
+.btn-p{display:inline-flex;align-items:center;gap:.4rem;background:var(--acc);color:#fff;font-family:var(--fd);font-weight:700;font-size:.86rem;padding:.8rem 1.7rem;border-radius:4px;transition:background .2s,transform .15s}
+.btn-p:hover{background:#e04d00;transform:translateY(-2px)}
+.btn-s{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--txt);font-family:var(--fd);font-weight:700;font-size:.86rem;padding:.8rem 1.7rem;border:1px solid var(--bdr);border-radius:4px;transition:border-color .2s,transform .15s}
+.btn-s:hover{border-color:rgba(255,255,255,.3);transform:translateY(-2px)}
+
+.wrap{padding:5rem 3.5rem}
+.label{font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);margin-bottom:.6rem;display:flex;align-items:center;gap:.65rem}
+.label::before{content:'';display:inline-block;width:20px;height:1px;background:var(--acc)}
+.stitle{font-family:var(--fd);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;letter-spacing:-.03em;line-height:1;margin-bottom:2rem}
+
+.pill{background:var(--surf2);border:1px solid var(--bdr);color:rgba(240,236,228,.7);font-size:.76rem;padding:.28rem .75rem;border-radius:100px;transition:all .2s;cursor:default}
+.pill:hover{border-color:var(--acc);color:var(--acc);background:rgba(255,92,0,.08)}
+.tag{display:inline-block;font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);background:rgba(255,92,0,.1);border:1px solid rgba(255,92,0,.22);padding:.2rem .6rem;border-radius:100px}
+
+.ticker{padding:.85rem 0;overflow:hidden;white-space:nowrap;background:var(--acc)}
+.ticker-inner{display:inline-block;animation:tick 22s linear infinite}
+.ticker span{font-family:var(--fd);font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;margin-right:3rem}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:999;align-items:center;justify-content:center;padding:2rem}
+.lb.open{display:flex}
+.lb img{max-width:90vw;max-height:88vh;object-fit:contain;border-radius:8px}
+.lb-close{position:fixed;top:1.2rem;right:1.5rem;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;opacity:.8;line-height:1}
+.lb-close:hover{opacity:1}
+
+footer{padding:1.6rem 3.5rem;border-top:1px solid var(--bdr);display:flex;justify-content:space-between;align-items:center;font-size:.76rem;color:var(--muted)}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.back-link{display:inline-flex;align-items:center;gap:.45rem;color:var(--muted);font-size:.82rem;font-weight:500;margin-bottom:2.5rem;transition:color .2s}
+.back-link:hover{color:var(--acc)}
+.skill-hero{padding:8rem 3.5rem 4rem;border-bottom:1px solid var(--bdr);position:relative;overflow:hidden}
+.skill-hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 80% 50%,rgba(255,92,0,.08) 0%,transparent 70%)}
+.skill-hero-content{position:relative;z-index:1;max-width:760px}
+.met{background:var(--surf2);border:1px solid var(--bdr);border-radius:8px;padding:.5rem .9rem}
+.met-n{font-family:var(--fd);font-size:1rem;font-weight:800;color:var(--acc2);line-height:1}
+.met-l{font-size:.65rem;color:var(--muted);margin-top:.1rem}
+
+@media(max-width:860px){
+  nav{padding:1rem 1.25rem}
+  .nav-links{gap:.9rem}
+  .wrap{padding:4rem 1.25rem}
+  .skill-hero{padding:7rem 1.25rem 3rem}
+  footer{flex-direction:column;gap:.4rem;text-align:center;padding:1.25rem}
+}
+
+.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+.proj-card{background:var(--surf);border:1px solid var(--bdr);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .25s,transform .25s}
+.proj-card:hover{border-color:rgba(255,92,0,.35);transform:translateY(-3px)}
+.proj-imgs{display:grid;grid-template-columns:1fr 1fr;gap:2px;height:175px;overflow:hidden}
+.proj-imgs img{width:100%;height:100%;object-fit:cover;cursor:pointer;transition:transform .4s}
+.proj-imgs img:hover{transform:scale(1.05)}
+.proj-head{padding:1.4rem 1.6rem 1rem}
+.proj-title{font-family:var(--fd);font-size:1.2rem;font-weight:800;margin:.5rem 0 .3rem}
+.proj-sub{font-size:.8rem;color:var(--acc2);font-weight:500;font-style:italic}
+.proj-body{padding:0 1.6rem 1.6rem;flex:1;display:flex;flex-direction:column;gap:.85rem}
+.proj-desc{font-size:.88rem;color:var(--muted);font-weight:300;line-height:1.75}
+.metrics{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:auto}
+.feature-list{display:flex;flex-direction:column;gap:.45rem}
+.fi{font-size:.85rem;color:rgba(240,236,228,.75);font-weight:300;padding:.38rem .75rem;background:var(--surf2);border-left:2px solid var(--acc);border-radius:0 4px 4px 0}
+.gallery3{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;border-radius:10px;overflow:hidden}
+.gallery3 img{width:100%;height:190px;object-fit:cover;cursor:pointer;transition:transform .35s}
+.gallery3 img:hover{transform:scale(1.04)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;border-radius:10px;overflow:hidden}
+.g2 img{width:100%;height:220px;object-fit:cover;cursor:pointer;transition:transform .35s}
+.g2 img:hover{transform:scale(1.04)}
+.info-box{background:var(--surf2);border:1px solid var(--bdr);border-left:3px solid var(--acc2);border-radius:8px;padding:1.4rem}
+.info-box h3{font-family:var(--fd);font-weight:800;font-size:.95rem;color:var(--acc2);margin-bottom:.65rem}
+.bl-row{display:flex;align-items:center;gap:.65rem;flex-wrap:wrap;padding:.8rem 0;border-bottom:1px solid var(--bdr)}
+.bl-row:last-child{border-bottom:none}
+.bl-label{font-family:var(--fd);font-size:.78rem;font-weight:700;color:var(--txt);min-width:220px}
+.bl-link{display:inline-flex;align-items:center;color:var(--muted);font-size:.78rem;background:var(--surf2);border:1px solid var(--bdr);padding:.28rem .7rem;border-radius:100px;transition:all .2s}
+.bl-link:hover{color:var(--acc);border-color:rgba(255,92,0,.4);background:rgba(255,92,0,.07)}
+.ops-flow{display:flex;border:1px solid var(--bdr);border-radius:10px;overflow:hidden;margin-bottom:2rem}
+.ops-step{flex:1;padding:1.4rem .9rem;text-align:center;background:var(--surf);border-right:1px solid var(--bdr);transition:background .2s}
+.ops-step:last-child{border-right:none}
+.ops-step:hover{background:var(--surf2)}
+.ops-n{font-family:var(--fd);font-size:.62rem;font-weight:700;color:var(--acc);letter-spacing:.1em;margin-bottom:.3rem}
+.ops-l{font-size:.78rem;font-weight:500;color:var(--txt)}
+.b-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-bottom:2.5rem}
+.b-stat{background:var(--surf2);border:1px solid var(--bdr);border-radius:10px;padding:1.5rem;text-align:center}
+.b-stat-n{font-family:var(--fd);font-size:2.2rem;font-weight:800;color:var(--acc);line-height:1;margin-bottom:.3rem}
+.b-stat-l{font-size:.8rem;color:var(--muted);font-weight:300}
+.caps-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem}
+@media(max-width:860px){
+  .proj-grid,.caps-grid,.b-stat-row{grid-template-columns:1fr}
+  .gallery3{grid-template-columns:1fr 1fr}
+  .ops-flow{flex-direction:column}
+  .ops-step{border-right:none;border-bottom:1px solid var(--bdr)}
+  .ops-step:last-child{border-bottom:none}
+}
+</style>
+</head>
+<body>
+<nav><a href="index.html" class="nav-logo">S<span>.</span>D</a><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="program-design.html">Program Design</a></li><li><a href="community.html">Community</a></li><li><a href="brand-growth.html">Brand & Growth</a></li><li><a href="ops-systems.html" class="active">Ops & Systems</a></li></ul></nav>
+
+<section class="skill-hero">
+  <div class="skill-hero-bg"></div>
+  <div class="skill-hero-content">
+    <a href="index.html" class="back-link">← Back to Home</a>
+    <div class="label">Skill Area</div>
+    <h1 style="font-family:var(--fd);font-size:clamp(2rem,5vw,3.8rem);font-weight:800;letter-spacing:-.03em;line-height:1;margin-bottom:1rem">⚙️ Operational & Systems Expansion</h1>
+    <p style="font-size:.97rem;color:var(--muted);font-weight:300;max-width:580px;line-height:1.82">Building scalable systems and processes that enable ecosystem growth — reducing manual effort by 50%+ through automation, SOPs, and data-backed optimisation.</p>
+    <div style="display:flex;gap:.45rem;flex-wrap:wrap;margin-top:1.25rem"><span class="pill">Workflow Streamlining</span><span class="pill">SOP Design</span><span class="pill">Dashboards</span><span class="pill">Automation</span><span class="pill">Data Optimisation</span></div>
+  </div>
+</section>
+
+<section class="wrap" style="background:var(--bg)">
+  <div class="reveal"><div class="label">Sprint Routine</div><h2 class="stitle">How I scale processes</h2></div>
+  <div class="ops-flow reveal">
+    <div class="ops-step"><div class="ops-n">01</div><div class="ops-l">Experiment</div></div>
+    <div class="ops-step"><div class="ops-n">02</div><div class="ops-l">Streamline</div></div>
+    <div class="ops-step"><div class="ops-n">03</div><div class="ops-l">Measure</div></div>
+    <div class="ops-step"><div class="ops-n">04</div><div class="ops-l">Feedback Loop</div></div>
+    <div class="ops-step"><div class="ops-n">05</div><div class="ops-l">Create SOP</div></div>
+    <div class="ops-step"><div class="ops-n">06</div><div class="ops-l">Automate</div></div>
+    <div class="ops-step"><div class="ops-n">07</div><div class="ops-l">Scale</div></div>
+  </div>
+  <div class="reveal"><div class="label">Capabilities</div><h2 class="stitle">What I build</h2></div>
+  <div class="caps-grid reveal">
+    <div class="info-box">
+      <h3>Workflow Streamlining</h3>
+      <div class="feature-list">
+        <div class="fi">Mapping existing workflows to identify inefficiencies</div>
+        <div class="fi">Redesigning processes for speed and reliability</div>
+        <div class="fi">50%+ reduction in manual effort through automation</div>
+      </div>
+    </div>
+    <div class="info-box">
+      <h3>SOP Implementation</h3>
+      <div class="feature-list">
+        <div class="fi">Creating clear, repeatable SOPs for all key processes</div>
+        <div class="fi">Ensuring consistency across teams and geographies</div>
+        <div class="fi">Version-controlled documentation in Notion / ClickUp</div>
+      </div>
+    </div>
+    <div class="info-box">
+      <h3>Dashboards & Reporting</h3>
+      <div class="feature-list">
+        <div class="fi">Simple, actionable dashboards for real-time tracking</div>
+        <div class="fi">Power BI & Google Workspace based reporting</div>
+        <div class="fi">Weekly / monthly ops reviews with data-backed insights</div>
+      </div>
+    </div>
+    <div class="info-box">
+      <h3>Data-Based Optimisation</h3>
+      <div class="feature-list">
+        <div class="fi">Identifying patterns and drop-off points in workflows</div>
+        <div class="fi">A/B testing process variations to find what scales</div>
+        <div class="fi">Continuous feedback loops built into every system</div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:2.5rem" class="reveal"><div class="label">Tools</div>
+    <div style="display:flex;gap:.45rem;flex-wrap:wrap;margin-top:.65rem">
+      <span class="pill">Notion</span><span class="pill">Jira</span><span class="pill">Asana</span><span class="pill">ClickUp</span><span class="pill">Airtable</span><span class="pill">Miro</span><span class="pill">Google Workspace</span><span class="pill">MS Excel</span><span class="pill">Power BI</span>
+    </div>
+  </div>
+</section>
+<footer><span>© 2026 Sagar Devadiga</span><span>Ecosystem Program Manager · Bengaluru, India</span></footer>
+<div class="lb" id="lb" onclick="closeLB()"><button class="lb-close" onclick="closeLB()">✕</button><img id="lb-img" src="" alt=""></div>
+<script>
+const obs=new IntersectionObserver((e)=>{e.forEach((el,i)=>{if(el.isIntersecting){setTimeout(()=>el.target.classList.add('visible'),i*70);obs.unobserve(el.target)}})},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+function openLB(src){document.getElementById('lb-img').src=src;document.getElementById('lb').classList.add('open');document.body.style.overflow='hidden'}
+function closeLB(){document.getElementById('lb').classList.remove('open');document.body.style.overflow=''}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLB()});
+</script>
+</body>
+</html>
